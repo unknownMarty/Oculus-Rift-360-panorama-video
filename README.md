@@ -8,6 +8,11 @@ clone this repository in your '[Openframeworks]/Apps' folder
 
 Copy your video into the bin/Data folder. See the video example for a resolution reference
 
+## Todo
+
+- Have not tested the head orientation for the DK2, because I don't own a DK2
+- Not tested the position of the DK2 video
+
 ## dependencies
 
 For the DK1:
