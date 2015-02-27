@@ -13,6 +13,9 @@ Copy your video into the bin/Data folder. See the video example for a resolution
 - Have not tested the head orientation for the DK2, because I don't own a DK2
 - Not tested the position of the DK2 video
 - Not tested on Visual studio (should not be much work to get it working)
+
+
+
 ## dependencies
 
 For the DK1:
