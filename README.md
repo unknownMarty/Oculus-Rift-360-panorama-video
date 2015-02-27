@@ -25,5 +25,14 @@ https://github.com/andreasmuller/ofxOculusRift
 For the DK2:
 https://github.com/obviousjim/ofxOculusDK2
 
+## Notes
+
+ DK 1 notes:
+ 
+remove the following lines from 'ofxOculusRift::beginRender( float _interOcularShift, ofFbo* _fbo  )' :
+ 
+   ofScale(1,1,1);
+   ofMultMatrix( getHeadsetViewOrientationMat() );
+
 www.minusplusminus.com
 
