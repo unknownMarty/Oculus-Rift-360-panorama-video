@@ -30,9 +30,9 @@ https://github.com/obviousjim/ofxOculusDK2
  DK 1 notes:
  
 remove the following lines from 'ofxOculusRift::beginRender( float _interOcularShift, ofFbo* _fbo  )' :
- 
+ ```c++
    ofScale(1,1,1);
    ofMultMatrix( getHeadsetViewOrientationMat() );
-
+```
 www.minusplusminus.com
 
