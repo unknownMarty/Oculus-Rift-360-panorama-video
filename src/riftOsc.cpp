@@ -19,6 +19,7 @@ void riftOsc::setup(mainRift * delegate)
     
     // open an outgoing connection to HOST:PORT
     sender.setup(HOST, PORT);
+    receiver.setup(12346);
     riftDelegate = delegate;
     ofAddListener(ofEvents().update, this, &riftOsc::update);
 }
@@ -46,14 +47,32 @@ void riftOsc::sendRift(ofMatrix4x4  mat,
                        float endTime,
                        bool isDone)
 {
+    //    stringstream str;
+    //
+    //
+    //    str<<mat;
+    //    string matrix = str.str();
+    //    vector<string> l = ofSplitString(matrix, "\n");
+    //    m.addIntArg(l.size());
+    //    for(auto line : l)
+    //    {
+    //        ofStringReplace(line, " ", "");
+    //        m.addStringArg( line);
+    //    }
+    
+    //    str.clear();
     
     ofxOscMessage m;
    
     m.setAddress("HeadsetOrientationMat");
-    stringstream str;
-    str<<mat;
-    m.addStringArg(str.str());
-    str.clear();
+    
+
+    ofQuaternion q = mat.getRotate();
+    cout<<q<<endl;
+    m.addFloatArg(q.x());
+    m.addFloatArg(q.y());
+    m.addFloatArg(q.z());
+    m.addFloatArg(q.w());
     
     sender.sendMessage(m);
     m.clear();

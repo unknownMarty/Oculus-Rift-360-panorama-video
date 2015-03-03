@@ -19,7 +19,13 @@ mainRift::~mainRift()
     ofRemoveListener(ofEvents().update, this, &mainRift::update);
     delete videoEyes[LEFT_EYE];
     delete videoEyes[RIGHT_EYE];
+    
+    for(int x=0; x< movies.size(); x++)
+    {
+        delete movies[x];
+    }
 }
+
 
 void mainRift::setup()
 {
@@ -30,9 +36,10 @@ void mainRift::setup()
 #endif
     
 #if defined(DK1)
-    
-  
+    oculusRift.init( ofGetWidth(), ofGetHeight(), 4 );
+    oculusRift.setPosition( 0,-30,0 );
 #endif
+    
     
     videoEyes[LEFT_EYE] = new ofFbo();
     videoEyes[RIGHT_EYE] = new ofFbo();
@@ -56,22 +63,19 @@ void mainRift::addMovie(string filename)
     // If an alpha channels is not used, setting a non-alpha pixel format
     // (e.g. OF_PIXELS_RGB) will increase performance.
     movies.push_back(new ofQTKitPlayer());
-    movies.back()->setPixelFormat(OF_PIXELS_RGBA);
+    movies.back()->setPixelFormat(OF_PIXELS_RGB);
     
     // Pixels and texture together is faster than PIXEL_ONLY and manually uploaded textures.
     ofQTKitDecodeMode decodeMode = OF_QTKIT_DECODE_PIXELS_AND_TEXTURE;
     
     movies.back()->loadMovie(filename, decodeMode);
 //    movies.back()->setPosition(.5);
-    movies.back()->play();
+    //movies.back()->play();
     
     videoEyes[LEFT_EYE]->allocate(movies.back()->getWidth(), movies.back()->getHeight()/2);
     videoEyes[RIGHT_EYE]->allocate(movies.back()->getWidth(), movies.back()->getHeight()/2);
 
-    oculusRift.init( ofGetWidth(), ofGetHeight(), 4 );
-    oculusRift.setPosition( 0,-30,0 );
-    
-  
+
 }
 
 void mainRift::stop(int id)
