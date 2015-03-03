@@ -1,16 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "mainRift.h"
 
-//#define DK2
-//#define DK2
-#if defined(DK2)
-#include "ofxOculusDK2.h"
-#endif
 
-#if defined(DK1)
-#include "ofxOculusRift.h"
-#endif
 
 /*
  DK 1 notes:
@@ -28,11 +21,7 @@ class testApp : public ofBaseApp
 {
   public:
     ~testApp();
-    enum Eye
-    {
-        LEFT_EYE,
-        RIGHT_EYE
-    };
+  
 	
 	void setup();
 	void update();
@@ -49,15 +38,7 @@ class testApp : public ofBaseApp
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
     
-    void beginEye(Eye eye);
-    void endEye(Eye eye);
-#if defined(DK2)
-	ofxOculusDK2		oculusRift;
-#endif
-    
-#if defined(DK1)
-    ofxOculusRift		oculusRift;
-#endif
+
 	ofLight				light;
 	ofEasyCam			cam;
 	bool showOverlay;
@@ -72,12 +53,6 @@ class testApp : public ofBaseApp
     
     ofVec3f cursorGaze;
     
-    ofQTKitPlayer movie;
+    mainRift* rift;
     
-
-    map<Eye,ofFbo*> videoEyes;
-   // ofFbo leftEye;
-   // ofFbo rightEye;
-    
-    void drawVideoOnSphere(Eye eye);
 };
